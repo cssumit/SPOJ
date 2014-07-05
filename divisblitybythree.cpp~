@@ -1,0 +1,80 @@
+#include<cstdio>
+#define MOD 1000000007
+using namespace std;
+int readInt(int &n){
+    int sign = 1;
+    char c;
+    bool found = false;
+    n = 0;
+    
+    while(true){
+     c = getc(stdin);
+    
+        switch(c){
+            case '-' :
+                sign = -1;
+                found = true;
+                break;
+            case ' ':
+                if(found) goto jump;
+                break;
+            case '\n':
+                if(found) goto jump;
+                break;
+            default:
+                if(c>='0' && c<='9'){
+                    n = n*10+c-'0';
+                    found = true;
+                }else goto jump;
+                break;
+        }
+    }
+    
+    jump:
+        n *= sign;
+}
+
+
+int main()
+{
+	int ans,n,a=1,m,fin=1;
+	while(scanf("%llu",&n)!=EOF)
+	{
+	fin=1;
+	if(n==0)
+	{
+		printf("0\n");
+	}
+	else
+	{
+	while(n>1)
+	{
+		m=n;
+		ans=2;
+		a=1;
+		while(m>1)
+		{
+			m=m/2;
+			a=a*2;
+			ans=(ans*ans)%MOD;
+		}
+		n=n-a;
+		fin=(ans*fin)%MOD;
+	}
+	if(n==1)
+	{
+		fin=(fin*2)%MOD;
+		fin=(fin-2)%MOD;
+	}
+	else
+	{
+		fin=(fin-1)%MOD;
+	}
+	fin=(fin*333333336)%MOD;
+	fin=fin+1;
+	printf("%d\n",fin);
+	}
+	}
+	return 0;
+}
+		
